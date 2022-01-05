@@ -1,18 +1,23 @@
-from node import Node
+from node import Node_ID3
 import math
-from printTree import print_tree
-
+from treelib import Tree
+import random
+tree = Tree()
 def build_tree(data,features):
 
         node = build_tree_rec(data,features)
         print("The decision tree for the dataset using ID3 algorithm is")
-        print_tree(node,0)
+        tree.show()
         return node
 
-def build_tree_rec(data,features): 
+def build_tree_rec(data,features,attribute=None):
+        global tree
         lastcol=[row[-1] for row in data] 
-        if(len(set(lastcol)))==1: 
-            node=Node("")
+        if(len(set(lastcol)))==1:
+            temp = Tree()
+            temp.create_node(lastcol[0],random.randint(1,100000))
+            tree.paste(attribute,temp)
+            node=Node_ID3("")
             node.answer=lastcol[0]
             return node
         
@@ -21,14 +26,20 @@ def build_tree_rec(data,features):
         for col in range(n):
             gains[col]=compute_gain(data,col)
         split=gains.index(max(gains))
-        node=Node(features[split])
+        new_tree = Tree()
+        new_tree.create_node(features[split],features[split])
+        node=Node_ID3(features[split])
         fea = features[:split]+features[split+1:]
-
-        
-        attr,dic=subtables(data,split,delete=True)
-        
+        attr,dic=subtables(data,split,delete=False)
         for x in range(len(attr)):
-            child=build_tree_rec(dic[attr[x]],fea)
+            new_tree.create_node(attr[x],attr[x],parent=features[split])
+        if tree.root:
+            tree.paste(attribute,new_tree)
+        else:
+            tree = new_tree
+        attr,dic=subtables(data,split,delete=True)
+        for x in range(len(attr)):        
+            child=build_tree_rec(dic[attr[x]],fea,attribute=attr[x])
             node.children.append((attr[x],child))
         return node
 
