@@ -7,7 +7,7 @@ Run the following command to install:
     pip install decision-tree-ID3-Algorithm
 ```
 
-## Useage 
+## Usage 
 ```python 
 from ID3Algorithm import ID3
 id3_2 = ID3(dataset_train,headers_train,dataset_test,headers_test)
