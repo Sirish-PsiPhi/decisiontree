@@ -4,10 +4,9 @@ with open('README.md','r') as fh:
     long_desc = fh.read()
 setup(
     name='decision-tree-ID3-Algorithm',
-    version='0.0.4',
+    version='0.0.5',
     description='Desicion Tree Algorithms',
-    py_modules=['buildTree','classify_data','ID3Algorithm','node'],
-    package_dir={'':'src'},
+    packages=['decisiontree'],
     classifiers=["Intended Audience :: Education", 
     "Operating System :: OS Independent", 
     "Programming Language :: Python :: 3.0",

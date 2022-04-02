@@ -1,4 +1,4 @@
-from node import Node_ID3
+from decisiontree.node import Node_ID3
 import math
 from treelib import Tree
 import random

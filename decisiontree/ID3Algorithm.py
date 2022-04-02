@@ -1,5 +1,5 @@
-from buildTree import build_tree
-from classify_data import classify
+from decisiontree.buildTree import build_tree
+from decisiontree.classify_data import classify
 class ID3:
     def __init__(self,*args):
         
